@@ -9,18 +9,18 @@
 
 int main(int args, char** argv){
   FILE *fp, *out;
-  fp   = popen("xsel", "r");
   char zeile[255];
   char puffer[255];
   char dateiname[128];
   time_t jetzt;
   struct tm* lokaljetzt;
-
   sqlite3* db;
   sqlite3_stmt* stmt;
   const char* tail;
   char *create, *insert;
 
+  fp   = popen("xsel", "r");
+  
   setlocale(LC_ALL, "");
   time(&jetzt);
   lokaljetzt = localtime(&jetzt);
