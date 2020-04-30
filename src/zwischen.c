@@ -15,7 +15,6 @@ int main(int argc, char** argv){
   sqlite3* db;
   sqlite3_stmt* stmt;
   const char* tail;
-
   
   setlocale(LC_ALL, "");
   time(&jetzt);
@@ -56,5 +55,5 @@ int main(int argc, char** argv){
 
   system(command);
   
-  printf("\nDatei %s ist soeben geschrieben worden.\n", dateiname);
+  printf("\nDatei %s ist soeben geschrieben und in dateien.db registriert worden.\n", dateiname);
 }
