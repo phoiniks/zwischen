@@ -8,8 +8,7 @@
 
 
 int main(int argc, char** argv){
-  FILE *fp, *out;
-  char zeile[255], puffer[255], command[59], dateiname[128],
+  char puffer[255], command[59], dateiname[128],
     *create, *insert;
   time_t jetzt;
   struct tm* lokaljetzt;
@@ -53,11 +52,9 @@ int main(int argc, char** argv){
   
   printf("Länge des Dateinamens: %d.\n", (int)strlen(dateiname));
   
-  if(fp == NULL){
-    puts("Anweisung fehlgeschlagen!");
-  }
+  snprintf(command, 255, "xclip -o > %s", dateiname);
 
-  snprintf(command, 59, "xclip -o > %s", dateiname);
+  system(command);
   
   printf("\nDatei %s ist soeben geschrieben worden.\n", dateiname);
 }
