@@ -9,17 +9,14 @@
 
 int main(int argc, char** argv){
   FILE *fp, *out;
-  char zeile[255];
-  char puffer[255];
-  char dateiname[128];
+  char zeile[255], puffer[255], command[59], dateiname[128],
+    *create, *insert;
   time_t jetzt;
   struct tm* lokaljetzt;
   sqlite3* db;
   sqlite3_stmt* stmt;
   const char* tail;
-  char *create, *insert;
 
-  fp   = popen("xsel", "r");
   
   setlocale(LC_ALL, "");
   time(&jetzt);
@@ -54,24 +51,15 @@ int main(int argc, char** argv){
 
   sqlite3_close(db);
   
-  printf("Länge des Dateinamens: %d.\n", strlen(dateiname));
+  printf("Länge des Dateinamens: %d.\n", (int)strlen(dateiname));
   
   if(fp == NULL){
     puts("Anweisung fehlgeschlagen!");
   }
 
-  out = fopen(dateiname, "w");
-
-  if(out == NULL){
-    puts("Datei kann nicht geöffnet werden!");
-  }
+  snprintf(command, 59, "xclip -o > %s", dateiname);
   
-  while(fgets(zeile, sizeof(zeile) -1, fp) != NULL){
-    printf("%s", zeile);
-    fprintf(out, "%s", zeile);
-  }
-
-  fclose(out);
+  printf("\nDatei %s ist soeben geschrieben worden.\n", dateiname);
 }
 
 
